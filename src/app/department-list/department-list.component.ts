@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DepartmentService } from 'src/app/department.service';
 
 @Component({
   selector: 'app-department-list',
@@ -7,15 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DepartmentListComponent implements OnInit {
 
-  public departments = [
-    { "id" : 1, "name" : "Rangasamy", "age"  : 86, "email" : "rangasamy@gmail.com", "department" : "IT"},
-    { "id" : 2, "name" : "Ranga", "age"  : 87 , "email" : "ranga@gmail.com",  "department" : "Accounts"},
-    { "id" : 3, "name" : "samy", "age"  : 88 , "email" : "samy@gmail.com" , "department" : "IT"}
-  ];
+  public departments = [];
 
-  constructor() { }
+  constructor(private _departmentService: DepartmentService) { }
 
   ngOnInit() {
+    this._departmentService.getDepartments()
+          .subscribe(data => this.departments = data );
   }
 
 }
